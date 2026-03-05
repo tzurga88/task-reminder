@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mes Rappels</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Mes Rappels</h1>
+    <div class="header-actions">
+      <button id="btn-test-telegram" class="btn btn-secondary">Tester Telegram</button>
+      <button id="btn-add" class="btn btn-primary">+ Nouvelle tache</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Filtres -->
+    <section class="filters">
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="pending">En cours</button>
+        <button class="filter-btn" data-filter="done">Terminees</button>
+        <button class="filter-btn" data-filter="all">Toutes</button>
+      </div>
+      <div class="filter-group">
+        <select id="filter-priority">
+          <option value="">Toutes les priorites</option>
+          <option value="high">Haute</option>
+          <option value="medium">Moyenne</option>
+          <option value="low">Basse</option>
+        </select>
+        <select id="filter-category">
+          <option value="">Toutes les categories</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Liste des taches -->
+    <section id="task-list" class="task-list">
+      <div class="loading">Chargement...</div>
+    </section>
+  </main>
+
+  <!-- Modal ajout/edition -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">Nouvelle tache</h2>
+        <button id="modal-close" class="btn-icon">&times;</button>
+      </div>
+      <form id="task-form">
+        <input type="hidden" id="task-id" />
+
+        <div class="form-group">
+          <label for="input-title">Titre *</label>
+          <input type="text" id="input-title" placeholder="Que dois-je faire ?" required />
+        </div>
+
+        <div class="form-group">
+          <label for="input-desc">Description</label>
+          <textarea id="input-desc" placeholder="Details supplementaires..." rows="3"></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="input-category">Categorie</label>
+            <input type="text" id="input-category" placeholder="General" list="categories-list" />
+            <datalist id="categories-list"></datalist>
+          </div>
+          <div class="form-group">
+            <label for="input-priority">Priorite</label>
+            <select id="input-priority">
+              <option value="low">Basse</option>
+              <option value="medium" selected>Moyenne</option>
+              <option value="high">Haute</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="input-due">Echeance</label>
+            <input type="datetime-local" id="input-due" />
+          </div>
+          <div class="form-group">
+            <label for="input-reminder">Rappel Telegram</label>
+            <input type="datetime-local" id="input-reminder" />
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="btn-cancel" class="btn btn-secondary">Annuler</button>
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast notifications -->
+  <div id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
