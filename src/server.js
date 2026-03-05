@@ -18,6 +18,14 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
+// Capturer les erreurs non gerees pour eviter les crashs
+process.on('uncaughtException', (err) => {
+  console.error('[Erreur non geree]', err.message);
+});
+process.on('unhandledRejection', (reason) => {
+  console.error('[Promesse rejetee]', reason);
+});
+
 initBot();
 startScheduler();
 
